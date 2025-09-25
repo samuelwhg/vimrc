@@ -1,44 +1,86 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
+let mapleader=" "
 set number
-set syntax=on
-set ruler
-set cursorline
-set autoindent
-set shiftwidth=4
-set smartindent
-set magic
-set scrolloff=3
-setlocal noswapfile
-set clipboard+=unnamed
+set relativenumber
+set wrap
+set showcmd
+set smartcase
+set autochdir
+set mouse=a
+set encoding=utf-8
+set expandtab
+set tw=0
+set indentexpr=
+set backspace=indent,eol,start
+set foldlevel=99
+set autowrite
+set ruler                   " 打开状态栏标尺
+set cursorline              " 突出显示当前行
+set magic                   " 设置魔术
+set scrolloff=3             " 顶部和底部时保持3行距离
 
-" set the runtime path to include Vundle and initialize
+noremap = nzz
+noremap - Nzz
+noremap <LEADER><CR> :nohlsearch<CR>
+map <C-s> :w<CR>
+map <C-q> :q<CR>
+map ; :
+
+noremap K 5k
+noremap J 5j
+noremap H 7h
+noremap L 7l
+
+map sl :set splitright<CR>:vsplit<CR>
+map sh :set nosplitright<CR>:vsplit<CR>
+map sj :set splitbelow<CR>:split<CR>
+map sk :set nosplitbelow<CR>:split<CR>
+
+map <leader>l <C-w>l
+map <leader>h <C-w>h
+map <leader>j <C-w>j
+map <leader>k <C-w>k
+
+map <up> :res +5<CR>
+map <down> :res -5<CR>
+map <left> :vertical resize-5<CR>
+map <right> :vertical resize+5<CR>
+
+map ti :tabe<CR>
+map tj :+tabnext<CR>
+map tk :-tabnext<CR>
+
+map sv <C-w>t<C-w>H
+map sh <C-w>t<C-w>K
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" airline设置
-" 显示颜色
+
 set t_Co=256
-set laststatus=2
-"let g:airline_powerline_fonts = 1
+" 使用powerline打过补丁的字体
+let g:airline_powerline_fonts = 1
+" 顶部显示状态栏
+let g:airline_statusline_ontop = 1
+" 开启tabline
 let g:airline#extensions#tabline#enabled = 1
+" tabline中当前buffer两端的分隔字符
 let g:airline#extensions#tabline#left_sep = ' '
+" tabline中未激活buffer两端的分隔字符
 let g:airline#extensions#tabline#left_alt_sep = ' '
+" tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_statusline_ontop=	1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_theme="molokai"
+ 
+Plugin 'The-NERD-tree'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeWinSize=25 
+ 
+Plugin 'indentLine.vim'
+Plugin 'delimitMate.vim'
+Plugin 'vim-scripts/indentpython.vim'
+ 
+call vundle#end()
 
-nmap <leader>wq :wq<CR>
-
+let g:python_highlight_all = 1
